@@ -1,0 +1,309 @@
+/* ================================================================
+   CURRENT AFFAIRS TEMPLATE — style.css
+   ✅ EDIT THIS FILE FOR: Animations, fonts, scrollbar, global resets
+   ❌ DO NOT add content/data here
+   ❌ DO NOT use 100vh or 100dvh anywhere
+   ================================================================ */
+
+/* --- Custom Animations --- */
+@keyframes fadeInApp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-app {
+  animation: fadeInApp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* --- Global Reset & Hardware Acceleration --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ca-card {
+  will-change: box-shadow, border-color, opacity;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  transition: opacity 0.35s ease, filter 0.35s ease, box-shadow 0.25s ease;
+  scroll-snap-align: start;
+  scroll-margin-top: 14px;
+}
+
+/* 🎬 Cinema Theatrical Spotlight Mode (Smooth & Natural Focus) */
+.ca-cinema-container .ca-card:not(.ca-podcast-glow) {
+  opacity: 0.45;
+  filter: grayscale(20%);
+  transition: opacity 0.35s ease, filter 0.35s ease, transform 0.35s ease;
+  transform: scale(0.985);
+}
+
+.ca-podcast-glow {
+  opacity: 1 !important;
+  filter: none !important;
+  border-color: #f59e0b !important;
+  box-shadow: 0 0 35px rgba(245, 158, 11, 0.5), 0 0 0 3px rgba(245, 158, 11, 0.9) !important;
+  transform: scale(1.02) translateZ(0) !important;
+  z-index: 20 !important;
+  transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* 🎬 100% Immersive Theater Presentation Broadcast Mode */
+body.ca-theater-mode header,
+body.ca-theater-mode #ca-app-header,
+body.ca-theater-mode #ca-category-bar,
+body.ca-theater-mode nav.bottom-nav,
+body.ca-theater-mode .category-bar-wrapper,
+body.ca-theater-mode .ca-theater-hide-on-broadcast {
+  display: none !important;
+}
+
+body.ca-theater-mode #study-notes-content {
+  max-width: 100vw !important;
+  width: 100vw !important;
+  min-height: 100vh !important;
+  height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 0.5rem 1rem !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+}
+
+body.ca-theater-mode .ca-theater-card-wrap {
+  max-width: 1860px !important;
+  width: 98vw !important;
+}
+
+/* 🎵 Live Sound Wave Equalizer Bars Animation */
+@keyframes eqBar {
+  0%, 100% { height: 3.5px; }
+  50% { height: 14px; }
+}
+.animate-eq-1 { animation: eqBar 0.65s ease-in-out infinite 0.1s; }
+.animate-eq-2 { animation: eqBar 0.5s ease-in-out infinite 0.3s; }
+.animate-eq-3 { animation: eqBar 0.75s ease-in-out infinite 0.2s; }
+.animate-eq-4 { animation: eqBar 0.55s ease-in-out infinite 0.4s; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* ----------------------------------------------------------------
+   CATEGORY BAR — Horizontal scroll with hidden scrollbar
+   ---------------------------------------------------------------- */
+.category-bar {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.125rem 0;
+}
+.category-bar::-webkit-scrollbar { display: none; }
+
+/* ----------------------------------------------------------------
+   MAIN CONTENT SCROLL — Thin scrollbar on desktop
+   ---------------------------------------------------------------- */
+.main-scroll {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  overscroll-behavior-y: contain;
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+}
+.main-scroll::-webkit-scrollbar { width: 3px; }
+.main-scroll::-webkit-scrollbar-track { background: transparent; }
+.main-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 2px; }
+
+/* ----------------------------------------------------------------
+   FLIP CARD — 3D CSS Transform (Crystal-Clear High DPI Crisp Rendering)
+   ---------------------------------------------------------------- */
+.perspective-1000 { 
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+.preserve-3d { 
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  will-change: transform;
+}
+.backface-hidden { 
+  backface-visibility: hidden; 
+  -webkit-backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-font-smoothing: antialiased;
+}
+.rotate-y-180 { 
+  transform: rotateY(180deg) translate3d(0, 0, 0); 
+  -webkit-transform: rotateY(180deg) translate3d(0, 0, 0);
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flip-card-inner.flipped { transform: rotateY(180deg); }
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 1.25rem;
+  overflow: hidden;
+}
+.flip-card-back { transform: rotateY(180deg); }
+
+/* ----------------------------------------------------------------
+   ANIMATIONS
+   ---------------------------------------------------------------- */
+
+/* Wrong answer shake */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  15%       { transform: translateX(-8px) rotate(-0.5deg); }
+  30%       { transform: translateX(8px) rotate(0.5deg); }
+  45%       { transform: translateX(-5px); }
+  60%       { transform: translateX(5px); }
+  75%       { transform: translateX(-3px); }
+  90%       { transform: translateX(3px); }
+}
+.shake { animation: shake 0.5s ease-in-out; }
+
+/* Card entry fade */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in-up { animation: fadeInUp 0.3s ease-out both; }
+
+/* Tab content transition — Silky Zero-Glare Fade Transition */
+@keyframes tabFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.tab-fade-in { animation: tabFadeIn 0.15s ease-out both; }
+.slide-in { animation: tabFadeIn 0.15s ease-out both; }
+
+/* Premium, horizontal sliding transition for card swapping */
+@keyframes smoothNext {
+  0% { transform: translateX(0); opacity: 1; }
+  45% { transform: translateX(-24px); opacity: 0; }
+  48% { transform: translateX(24px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+@keyframes smoothPrev {
+  0% { transform: translateX(0); opacity: 1; }
+  45% { transform: translateX(24px); opacity: 0; }
+  48% { transform: translateX(-24px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+.animate-smooth-next { animation: smoothNext 0.35s cubic-bezier(0.25, 1, 0.5, 1); }
+.animate-smooth-prev { animation: smoothPrev 0.35s cubic-bezier(0.25, 1, 0.5, 1); }
+
+/* Mistake badge pulse */
+@keyframes pulseBadge {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.25); }
+}
+.pulse-badge { animation: pulseBadge 0.5s ease-in-out; }
+
+/* ----------------------------------------------------------------
+   CARD HOVER — Desktop only
+   ---------------------------------------------------------------- */
+.ca-card {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+@media (hover: hover) {
+  .ca-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.10);
+  }
+}
+
+/* ----------------------------------------------------------------
+   BOTTOM NAV SAFE AREA — iOS home bar + Android nav bar
+   ---------------------------------------------------------------- */
+.bottom-nav-safe {
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 4px);
+}
+
+/* ----------------------------------------------------------------
+   EYE SHIELD OVERLAY — pointer-events: none, z-index: 9999
+   ---------------------------------------------------------------- */
+.eye-shield-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: multiply;
+  transition: opacity 0.3s ease;
+}
+
+/* ----------------------------------------------------------------
+   MOBILE FINE-TUNE
+   ---------------------------------------------------------------- */
+@media (max-width: 640px) {
+  .ca-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* ----------------------------------------------------------------
+   EXAM / MOCK TEST STYLES
+   ---------------------------------------------------------------- */
+
+/* Timer pulse — shown when < 2 minutes left */
+@keyframes examTimerPulse {
+  0%,  100% { opacity: 1;    }
+  50%        { opacity: 0.45; }
+}
+.exam-timer-pulse {
+  animation: examTimerPulse 0.75s ease-in-out infinite;
+}
+
+/* Palette number button hover glow */
+.palette-btn:hover {
+  filter: brightness(1.15);
+}
+
+/* Option button active press effect */
+.exam-option:active {
+  transform: scale(0.985);
+}
+
+/* Mobile palette drawer slide up */
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+.palette-drawer {
+  animation: slideUp 0.22s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* Tabular numbers for timer */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
